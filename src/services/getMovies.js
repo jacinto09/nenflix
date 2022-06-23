@@ -1,17 +1,22 @@
-const api_key = '55b85469'
-const new_url = 'https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability/'
-export const getMovies = async (searchTerm) => {
-	const url = `http://www.omdbapi.com/?apikey=${api_key}&t=${searchTerm}`;
-	
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '90a0f4b832msh8074fb5065a3f7dp111486jsn41c39244bcf9',
+		'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+	}
+};
+export const getMovies= async (searchTerm) => {
+	const url = `https://streaming-availability.p.rapidapi.com/search/basic?country=es&service=netflix&type=movie&genre=18&keyword=${searchTerm}&page=1&output_language=en&language=en`
+
 	try {
-	const response =  await fetch(url)
-	const data = await response.json(); 
-	console.log(data)
-	return data
-	
-	}catch (error) {
+	const response = await fetch(url, options)
+	const data = await response.json()
+	const movies = data.results
+	console.log(movies)
+	return movies
+    }catch (error) {	
 		console.log(error);
 	}
-	
 }
 

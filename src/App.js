@@ -10,7 +10,6 @@ function App() {
 
   return (
     <>
-    {/* need to pass the searchTerm to ListOfMovies */}
       <Navbar/>
       <ListOfMovies/>
     </>

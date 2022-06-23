@@ -1,8 +1,10 @@
 export default function handleUndefined(value) {
     if(typeof value === 'undefined'){
-        return `no value found`
+        return `No value found`
     }
-    else {
+    if(value === 'N/A'){
+        return `https://via.placeholder.com/500`
+    }else {
         return value
     }
 }

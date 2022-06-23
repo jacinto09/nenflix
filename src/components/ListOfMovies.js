@@ -2,6 +2,7 @@ import React from 'react'
 import {getMovies} from '../services/getMovies'
 import { useState, useEffect } from 'react'
 import Movie from './Movie'
+import NoMovies from './NoMovies';
 function ListOfMovies() {
     const [movies, setMovies] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -14,14 +15,9 @@ function ListOfMovies() {
     useEffect(() => {
      if(searchTerm.length > 0) {
       getMovies(searchTerm).then (data => {
-      setMovies(typeof data !=="undefined" ? data : setSearchTerm(''))
+      setMovies(data)
         })
         console.log(movies);
-     }else{
-      getMovies().then (data => {
-      setMovies(typeof data !=="undefined" ? data : setSearchTerm(''))
-        }
-        )
      }
       
       
@@ -31,13 +27,20 @@ function ListOfMovies() {
     
     
   return (
-   <>
-    
+  
     <div className='listofmovies'> 
-    <input type="text" name="search" id="nav-search" placeholder='Search' value={searchTerm} onChange={handleChange}/>    
-    <Movie key={movies.imdbID} {...movies} />
+    <input type="text" name="search" id="nav-search" placeholder='Search' value={searchTerm} onChange={handleChange}/> 
+    <div className='movies-container'> 
+    
+      {
+       movies!==[]&& typeof movies !=='undefined'&& movies.length >0? movies.map(movie => {
+          return <Movie key={movie.imdbID} {...movie} />
+
+        }): <NoMovies />
+      }
     </div>
-    </>
+    </div>
+
   )
   }
 

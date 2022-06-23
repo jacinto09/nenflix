@@ -1,14 +1,14 @@
 import React from 'react'
 import handleUndefined from '../services/handleUndefined'
-function Movie({imdbID, Title, Type, Runtime, Poster}) {
+function Movie({imdbID, title, year, runtime, posterURLs }) {
   return (
     <div className='movie' key={imdbID}>
-        <h2>{Title}</h2>
-        <img src={handleUndefined(Poster)} alt="movie" />
+        <h2>{title}</h2>
+        <img src={handleUndefined(posterURLs.original)} alt="movie" />
         <p>
-            Type: {handleUndefined(Type)}
+            Year: {handleUndefined(year)}
         <br />
-            Duration: { handleUndefined(Runtime)}
+            Duration: { handleUndefined(runtime)} minutes
         </p>
     </div>
 
